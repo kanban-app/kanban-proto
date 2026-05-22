@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package auth;
+
+// Сервис валидации — его вызывают другие сервисы
+service AuthService {
+  // Проверить токен и вернуть данные пользователя
+  rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse);
+
+  // Получить права пользователя в конкретном workspace
+  rpc GetUserPermissions(GetUserPermissionsRequest) returns (GetUserPermissionsResponse);
+}
+
+message ValidateTokenRequest {
+  string token = 1;
+}
+
+message ValidateTokenResponse {
+  bool valid = 1;
+  string user_id = 2;
+  string email = 3;
+}
+
+message GetUserPermissionsRequest {
+  string user_id = 1;
+  string workspace_id = 2;
+}
+
+message GetUserPermissionsResponse {
+  bool is_member = 1;
+  string role = 2; // "OWNER" | "MEMBER"
+}
