@@ -1,9 +1,6 @@
 syntax = "proto3";
 
-package events;
-
-// Kafka события от task-service
-// notification-service будет десериализовывать эти сообщения
+package events.v1;
 
 message TaskCreatedEvent {
   string task_id = 1;
@@ -12,14 +9,14 @@ message TaskCreatedEvent {
   string title = 4;
   string created_by_id = 5;
   optional string assignee_id = 6;
-  string created_at = 7; // ISO 8601
+  string created_at = 7;
 }
 
 message TaskUpdatedEvent {
   string task_id = 1;
   string workspace_id = 2;
   string updated_by_id = 3;
-  string field = 4;      // какое поле изменилось
+  string field = 4;
   string old_value = 5;
   string new_value = 6;
   string updated_at = 7;
@@ -28,7 +25,7 @@ message TaskUpdatedEvent {
 message TaskAssignedEvent {
   string task_id = 1;
   string workspace_id = 2;
-  string assignee_id = 3; // кому назначили
+  string assignee_id = 3;
   string assigned_by_id = 4;
   string assigned_at = 5;
 }

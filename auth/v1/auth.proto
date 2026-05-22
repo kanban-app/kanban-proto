@@ -1,13 +1,9 @@
 syntax = "proto3";
 
-package auth;
+package auth.v1;
 
-// Сервис валидации — его вызывают другие сервисы
 service AuthService {
-  // Проверить токен и вернуть данные пользователя
   rpc ValidateToken(ValidateTokenRequest) returns (ValidateTokenResponse);
-
-  // Получить права пользователя в конкретном workspace
   rpc GetUserPermissions(GetUserPermissionsRequest) returns (GetUserPermissionsResponse);
 }
 
@@ -28,5 +24,5 @@ message GetUserPermissionsRequest {
 
 message GetUserPermissionsResponse {
   bool is_member = 1;
-  string role = 2; // "OWNER" | "MEMBER"
+  string role = 2;
 }
